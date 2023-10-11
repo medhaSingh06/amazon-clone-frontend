@@ -1,6 +1,6 @@
 import { AppBar, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-
+import {Link}  from  'react-router-dom'
 export const Header = () => {
   return (
     <AppBar position='static'>
@@ -12,7 +12,13 @@ export const Header = () => {
           Tech Mart
         </Typography>
         <Stack direction='row' spacing={2}>
-          <Button color='inherit'>Products</Button>
+          <Button color='inherit' component={Link} to="/">Store</Button>
+          <Button color='inherit' component={Link} to="/products">Products</Button>
+          <Button color='inherit' component={Link} to="/userProfile">Profile</Button>
+          {/* if not login */}
+          <Button color='inherit' component={Link} to="/signIn">Sign In</Button>
+          <Button color='inherit' component={Link}>Cart</Button>
+          <Button color='inherit'>Cart items: 0</Button>
 
         </Stack>
       </Toolbar>

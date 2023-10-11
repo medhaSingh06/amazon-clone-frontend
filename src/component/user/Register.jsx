@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Container, Typography, TextField, Button, Grid, Paper, Input} from '@mui/material'
 
-export default function Register() {
+export const Register = () => {
   const { 
     register, 
     handleSubmit, 
@@ -13,10 +13,10 @@ export default function Register() {
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h4" align='center' gutterBottom> Registration</Typography>
+      <Typography variant="h4" align='center' gutterBottom > Registration</Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-      <Grid item xs={12} gutterBottom>
+      <Grid item xs={12} gutterBottom >
         <TextField
           {...register('firstName', { 
             required: "Name is required", 
@@ -36,7 +36,7 @@ export default function Register() {
         />
         </Grid>
 
-        <Grid item xs={12} gutterBottom>
+        <Grid item xs={12} gutterBottom >
         <TextField
           {...register('lastName', { pattern: /^[A-Za-z]+$/i })}
           label="Last Name"
@@ -45,7 +45,7 @@ export default function Register() {
           helperText={errors.lastName && "Last Name is required"}
         />
         </Grid>
-        <Grid item xs={12} gutterBottom>
+        <Grid item xs={12} gutterBottom >
         <TextField
            {...register("email", {
               required: "Email is required",
@@ -62,7 +62,7 @@ export default function Register() {
           helperText={errors.email && errors.email.message }
         />
         </Grid>
-        <Grid item xs={12} gutterBottom>
+        <Grid item xs={12} gutterBottom >
         <TextField
           {...register('password', { required: true })}
           label="Password"
@@ -72,7 +72,7 @@ export default function Register() {
           helperText={errors.password && "Password is required"}
         />
         </Grid>
-        <Grid item xs={12} gutterBottom>
+        <Grid item xs={12} gutterBottom >
             <Typography variant='body2' gutterBottom >Profile Picture</Typography>
             <Paper elevation={3}>
             <label htmlFor='profilePicture' style={{cursor: 'pointer'}}>

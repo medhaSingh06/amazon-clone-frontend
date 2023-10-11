@@ -1,11 +1,12 @@
-import React from 'react'
+
 import { Layout } from '../layout/Layout'
-import Register from '../user/Register'
+import { Typography } from '@mui/material'
+
 
 export const HomePage = () => {
   return (
     <Layout>
-    <Register/>
+    <Typography>Home page</Typography>
     </Layout>
   )
 }
