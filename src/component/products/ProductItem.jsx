@@ -5,18 +5,29 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
-import { useSelector } from 'react-redux';
+import { cartActions } from '../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 export const ProductItem = (props) => {
-  const {id,itemName, price, description } = props
-
-
+  const dispatch = useDispatch()
+  const {id,itemName, price, description, imageURL} = props
+console.log(imageURL)
+  // console.log(imageURL)
+  const handleAddToCart = () => {
+    dispatch(cartActions.addItemToCart({
+      id,
+      itemName,
+      price,
+      description,
+      imageURL
+    }))
+  }
+ 
   
   return (
     <Card sx={{ maxWidth: 345 }}>
     <CardMedia
       sx={{ height: 140 }}
-      image="/static/images/cards/contemplative-reptile.jpg"
+      image={imageURL}
       title="green iguana"
     />
     <CardContent>
@@ -29,7 +40,7 @@ export const ProductItem = (props) => {
     </CardContent>
     <CardActions>
       <Button size="small">{price}</Button>
-      <Button size="small">Add to Cart</Button>
+      <Button size="small" onClick={handleAddToCart}>Add to Cart</Button>
       <Button size="small">Learn More</Button>
     </CardActions>
   </Card>

@@ -1,7 +1,7 @@
 import { AppBar, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import {Link}  from  'react-router-dom'
-export const Header = () => {
+export const Header = ({openCartModal, isCartOpen}) => {
   return (
     <AppBar position='static'>
       <Toolbar>
@@ -17,8 +17,9 @@ export const Header = () => {
           <Button color='inherit' component={Link} to="/userProfile">Profile</Button>
           {/* if not login */}
           <Button color='inherit' component={Link} to="/signIn">Sign In</Button>
-          <Button color='inherit' component={Link}>Cart</Button>
-          <Button color='inherit'>Cart items: 0</Button>
+          <Button color='inherit' component={Link} to='/cart'onClick={openCartModal} >Cart</Button>
+          {isCartOpen ? <span>Cart is open</span>: null}
+          {/* <Button color='inherit'>Cart items: 0</Button> */}
 
         </Stack>
       </Toolbar>

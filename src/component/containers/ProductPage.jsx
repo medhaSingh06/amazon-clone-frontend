@@ -4,8 +4,8 @@ import { Products } from '../products/Products'
 
 export const ProductPage = () => {
   return (
-    <Layout>
+    
     <Products/>
-    </Layout>
+    
   )
 }

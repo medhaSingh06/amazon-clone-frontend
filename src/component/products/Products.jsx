@@ -24,7 +24,7 @@ export const Products = () => {
     if(status === STATUS.ERROR){
       return <h2>Something went wrong</h2>
     }
-    // console.log(products)
+
   return (
     <div>
     <Typography variant="h4">Product List</Typography>
@@ -37,6 +37,7 @@ export const Products = () => {
           itemName={item.itemName}
           price={item.price}
           description={item.description}
+          imageURL={item.imageURL}
         />
       </Paper>
       </Grid>
