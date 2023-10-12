@@ -1,7 +1,8 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 export const UserProfile = () => {
   return (
-    <div>UserProfile</div>
+    <Typography color="secondary">UserProfile</Typography>
   )
 }

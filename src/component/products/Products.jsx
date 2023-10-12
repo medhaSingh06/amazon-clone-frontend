@@ -1,33 +1,52 @@
 
-import {Typography, Paper, Grid} from '@mui/material'
+import {Typography, Paper, Grid, TextField, InputAdornment} from '@mui/material'
 // import { DUMMY_ITEMS } from '../../MenuData'
 import {ProductItem} from './ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchProducts } from '../store/productSlice'
+import SearchIcon from '@mui/icons-material/Search';
 import {STATUS} from '../store/productSlice'
 
 export const Products = () => {
     const dispatch = useDispatch()
+    const [searchQuery, setSearchQuery] = useState('')
     const {data: products, status} = useSelector(state => state.product)
-  //   const {status} = useSelector( state => state.product)
-
-   
 
     useEffect(() => {
       dispatch(fetchProducts())
     }, [])
     if(status === STATUS.LOADING) {
-      return <h2>Loading...</h2>
+      return <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Loading...</Typography>
     }
     
     if(status === STATUS.ERROR){
-      return <h2>Something went wrong</h2>
+      return <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Something went wrong</Typography>
     }
 
   return (
     <div>
-    <Typography variant="h4">Product List</Typography>
+    <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Product List</Typography>
+
+    <TextField
+      label="Search products..."
+      variant="outlined"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon color="primary" />
+          </InputAdornment>
+        ),
+        sx: {
+          color: 'white',
+          '& fieldset': { borderColor: 'white' },
+          '&:hover fieldset': { borderColor: 'white' },
+        },
+      }}
+    />
+
     <Grid container spacing={3}>
     {products.map((item) => (
     <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>

@@ -52,8 +52,8 @@ const CartSlice = createSlice({
     removeEntireItem(state, action) {
       const id = action.payload
       const existingItem = state.items.find( (item) => item.id === id)
-      state.totalPrice = state.totalPrice - existingItem.price
-      state.totalQuantity--
+      state.totalPrice = state.totalPrice - (existingItem.price* existingItem.quantity)
+      state.totalQuantity = state.totalQuantity - existingItem.quantity
       state.items = state.items.filter((item)=> item.id !== id)
     }}
     

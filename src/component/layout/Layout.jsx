@@ -7,7 +7,7 @@ export const Layout = ({children}) => {
     <div className='layout-container'>
         <Header/>
         <main className='content'>{children}</main>
-        <Footer />
+        <Footer style={{ paddingTop: '20px' }} />
     </div>
   )
 }

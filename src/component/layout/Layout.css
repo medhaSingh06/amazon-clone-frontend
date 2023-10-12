@@ -11,6 +11,7 @@
     padding: 20px; 
   }
   
+  
   /* Sticky Header */
   Header {
     position: sticky;
@@ -21,6 +22,7 @@
   
   /* Sticky Footer */
   Footer {
+    /* padding-top: 10px; */
     position: sticky;
     bottom: 0;
     background-color: #fff; /* Customize the footer background color */
