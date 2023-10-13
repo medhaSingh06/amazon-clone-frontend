@@ -10,22 +10,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Snackbar, SnackbarContent } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { UseAuth } from '../context/AuthContext';
 export const ProductItem = (props) => {
   const dispatch = useDispatch()
   const {id,itemName, price, description, imageURL} = props
 
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
-
+  const {token} = UseAuth()
 
 
   const handleAddToCart = () => {
-    dispatch(cartActions.addItemToCart({
-      id,
-      itemName,
-      price,
-      description,
-      imageURL
-    }))
+    if(token){
+      dispatch(cartActions.addItemToCart({
+        id,
+        itemName,
+        price,
+        description,
+        imageURL
+      }))  
+    }
+    
     setIsSnackbarOpen(true)
   }
 
@@ -60,9 +64,23 @@ export const ProductItem = (props) => {
       onClose={handleSnackbarClose}
       anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       >
-      <Alert onClose={handleSnackbarClose} severity="success" sx={{width: '100%'}}>
-        Product added to cart
-      </Alert>
+      {token ? (
+            <Alert
+              onClose={handleSnackbarClose}
+              severity="success"
+              sx={{ width: '100%' }}
+            >
+              Product added to cart
+            </Alert>
+          ) : (
+            <Alert
+              onClose={handleSnackbarClose}
+              severity="info"
+              sx={{ width: '100%' }}
+            >
+              Please sign in to add the product to the cart.
+            </Alert>
+          )}
       </Snackbar>
     </CardActions>
   </Card>

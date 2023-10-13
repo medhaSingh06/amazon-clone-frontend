@@ -1,5 +1,4 @@
-import React from 'react'
-import { Container, Grid, Typography,Paper, Button, Card, CardContent, CardMedia, CardActions } from '@mui/material'
+import { Container, Grid, Typography,Paper, Button, Card, CardMedia, CardActions } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { cartActions } from '../store/cartSlice'
 export const CartItem = (props) => {
@@ -54,7 +53,7 @@ export const CartItem = (props) => {
         Quantity: {quantity}
         </Typography>
         <CardActions>
-                   <Button size="small" color="secondary" onClick={addItemHandler} variant='outlined'>
+              <Button size="small" color="secondary" onClick={addItemHandler} variant='outlined'>
                      +
                    </Button>
                    <Button size="small" color="secondary" onClick={removeItemHandler} variant='outlined'>
@@ -69,85 +68,6 @@ export const CartItem = (props) => {
     </Grid>
     </Paper>
   </Container>
-    // <Container maxWidth="sm" sx={{ width: '100%', minHeight: '400px' }}>
-    //     <Grid container spacing={2}>
-    //         <Grid item xs={12} key={id}>
-    //           <Card>
-
-    //             <CardMedia
-    //               component="img"
-    //               height="100"
-    //               image={image}
-    //               alt={itemName}
-    //             />
-    //             <CardContent>
-    //               <Typography variant="h6" component="div">
-    //                 {itemName}
-    //               </Typography>
-    //               <Typography variant="body2" color="textSecondary">
-    //                 Price: ${price}
-    //               </Typography>
-    //               <Typography variant="body2" color="textSecondary">
-    //                 Quantity: {quantity}
-    //               </Typography>
-    //               <Button variant="outlined" color="primary" onClick={removeEntireItem}>
-    //                 Remove
-    //               </Button>
-    //             </CardContent>
-    //             <CardActions>
-    //               <Button size="small" color="primary" onClick={addItemHandler}>
-    //                 Increase Quantity
-    //               </Button>
-    //               <Button size="small" color="primary" onClick={removeItemHandler}>
-    //                 Decrease Quantity
-    //               </Button>
-    //             </CardActions>
-    //           </Card>
-    //         </Grid>
-    //     </Grid>
-    // </Container>
-    // <TableRow>
-    // <TableCell>
-    // <div style={{width:'100px'}}>
-    //   <CardMedia 
-    //     component="img"
-    //     alt={itemName}
-    //     height="50"
-    //     image={image}
-    //   />
-    //   </div>
-    // </TableCell>
-    //   <TableCell>{itemName}</TableCell>
-    //   <TableCell>${price}</TableCell>
-    //   <TableCell>${quantity}</TableCell>
-    //   <TableCell>${price*quantity}</TableCell>
-    //   <TableCell>
-    //   <Button
-    //       onClick={addItemHandler} 
-    //       variant="outlined"
-    //       color="primary"
-    //     >
-    //       +Add
-    //     </Button>
-    //   </TableCell>
-    //   <TableCell>
-    //     <Button
-    //       onClick={removeItemHandler} 
-    //       variant="outlined"
-    //       color="primary"
-    //     >
-    //       -Remove
-    //     </Button>
-    //   </TableCell>
-    //   <TableCell>
-    //     <Button
-    //       onClick={removeEntireItem}
-    //       variant="outlined"
-    //       color="primary"
-    //     >
-    //       Remove
-    //     </Button>
-    //   </TableCell>
-    // </TableRow>
+    
   )
 }

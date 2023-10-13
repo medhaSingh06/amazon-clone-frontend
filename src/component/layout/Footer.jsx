@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography } from '@mui/material'
-import React from 'react'
-
+import './Layout.css'
 export const Footer = () => {
+  
   return (
     <AppBar position='static' color="primary">
       <Toolbar>

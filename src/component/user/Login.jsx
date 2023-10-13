@@ -1,6 +1,6 @@
 
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   Avatar,
@@ -14,7 +14,13 @@ import {
   Typography,
   Container,
 } from '@mui/material'
+import { userLogin } from '../../api/apiHandler';
+import { UseAuth } from '../context/AuthContext';
 export const Login = () => {
+
+  const {token, signIn} = UseAuth()
+
+  const navigate  = useNavigate()
     const { 
         register, 
         handleSubmit, 
@@ -22,9 +28,30 @@ export const Login = () => {
       } = useForm();
      
       const onSubmit = (data) =>{
-        console.log(data)
+        userLogin(data).then(res=> {
+          if(res.status === 200){
+            // localStorage.setItem('Atoken', res.data.token);
+            signIn(res.data.token)
+
+            // navigate to home page
+            alert('success')
+            navigate('/product')
+
+          }else{
+            // error message
+          }
+        })
     };
   return (
+    <>
+    {
+      token ? (
+        <>
+           <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>ALready Login</Typography>
+        </>
+      ) : (
+        <>
+
     <Container component="main" maxWidth="xs" sx={{bgcolor: 'white'}}>
         <CssBaseline />
         <Box
@@ -42,7 +69,7 @@ export const Login = () => {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
-          <TextField
+          {/* <TextField
                   {...register('firstName', { 
           required: "Name is required", 
           minLength: {
@@ -53,13 +80,17 @@ export const Login = () => {
           value: 20,
           message: "Name should be less than 20 characters",
         },
+        pattern: {
+    value: /^[a-zA-Z ]+$/,
+    message: "Name should contain only alphabetic characters",
+  },
          })}
         label="First Name"
         fullWidth
         error={!!errors.firstName}
         helperText={errors.firstName && errors.firstName.message }
         
-                />
+                /> */}
             <TextField
            {...register("email", {
               required: "Email is required",
@@ -111,5 +142,9 @@ export const Login = () => {
         </Box>
 
       </Container>
+        </>
+      )
+    }
+    </>
   )
 }
