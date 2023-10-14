@@ -16,7 +16,7 @@ export const Products = () => {
     const dispatch = useDispatch()
     const [searchQuery, setSearchQuery] = useState('')
     const {data: products, status} = useSelector(state => state.product)
-    console.log(products)
+    console.log(products, "fewdsa")
     useEffect(() => {
         dispatch(fetchProducts())
     }, [])
@@ -30,7 +30,7 @@ export const Products = () => {
 
   return (
     <div>
-      <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Please Login First</Typography>
+      {/* <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Please Login First</Typography> */}
     
     <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Product List</Typography>
 
@@ -59,7 +59,7 @@ export const Products = () => {
       <Paper key={item.id} elevation={3} style={{ padding: '20px', margin: '10px'}}>
         <ProductItem
           id={item.id}
-          itemName={item.itemName}
+          name={item.name}
           price={item.price}
           description={item.description}
           imageURL={item.imageURL}

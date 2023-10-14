@@ -13,12 +13,17 @@ import {
   Box,
   Typography,
   Container,
+  Snackbar,
+  Alert
 } from '@mui/material'
+import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { userLogin } from '../../api/apiHandler';
 import { UseAuth } from '../context/AuthContext';
+import { useState } from 'react';
 export const Login = () => {
 
-  const {token, signIn} = UseAuth()
+  const {signIn} = UseAuth()
 
   const navigate  = useNavigate()
     const { 
@@ -27,30 +32,35 @@ export const Login = () => {
         formState: { errors } 
       } = useForm();
      
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+    const [snackbarMessage, setSnackbarMessage] = useState(' ')
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success')
+
+    const handleSnackbarClose = () => {
+      setOpenSnackbar(false)
+    }
       const onSubmit = (data) =>{
+          
         userLogin(data).then(res=> {
+
           if(res.status === 200){
-            // localStorage.setItem('Atoken', res.data.token);
+
             signIn(res.data.token)
-
-            // navigate to home page
-            alert('success')
-            navigate('/product')
-
-          }else{
-            // error message
+            // setSnackbarSeverity('success')
+            // setSnackbarMessage(res.data.message)
+            navigate('/')
           }
+         
+        })
+        .catch((err) => {
+          setSnackbarSeverity('error')
+          setSnackbarMessage(err.response.data.message)
+          setOpenSnackbar(true)
+
         })
     };
   return (
     <>
-    {
-      token ? (
-        <>
-           <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>ALready Login</Typography>
-        </>
-      ) : (
-        <>
 
     <Container component="main" maxWidth="xs" sx={{bgcolor: 'white'}}>
         <CssBaseline />
@@ -69,28 +79,7 @@ export const Login = () => {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
-          {/* <TextField
-                  {...register('firstName', { 
-          required: "Name is required", 
-          minLength: {
-          value: 3,
-          message: "Name should be greater than 2 characters",
-        },
-        maxLength: {
-          value: 20,
-          message: "Name should be less than 20 characters",
-        },
-        pattern: {
-    value: /^[a-zA-Z ]+$/,
-    message: "Name should contain only alphabetic characters",
-  },
-         })}
-        label="First Name"
-        fullWidth
-        error={!!errors.firstName}
-        helperText={errors.firstName && errors.firstName.message }
-        
-                /> */}
+          
             <TextField
            {...register("email", {
               required: "Email is required",
@@ -107,17 +96,27 @@ export const Login = () => {
           helperText={errors.email && errors.email.message }
         />
              <TextField
-          {...register('password', { required: true })}
-          label="Password"
-          type="password"
-          fullWidth
+                  {...register('password', { 
+                    required: "Password is required", 
+                    minLength: {
+                      value: 3,
+                      message: "Password should be greater than 2 characters",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Password should be less than 20 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/,
+                      message: "minimum five characters, at least one letter and one number",
+                    }
+                    })}
+                    label="Password"
+                    type="password"
+                    fullWidth
           error={!!errors.password}
-          helperText={errors.password && "Password is required"}
+          helperText={errors.password && errors.password.message}
         />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -128,9 +127,6 @@ export const Login = () => {
             </Button>
             <Grid container justifyContent="space-between">
   <Grid item xs>
-    <Button color="primary" component={Link}>
-      Forgot Password
-    </Button>
   </Grid>
   <Grid item>
     <Button color="primary" component={Link} to="/register">
@@ -142,9 +138,16 @@ export const Login = () => {
         </Box>
 
       </Container>
-        </>
-      )
-    }
+      <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={handleSnackbarClose}>
+            <Alert severity={snackbarSeverity}>
+              {/* {snackbarSeverity === 'success' ? (
+                <CheckCircleIcon fontSize="inherit" />
+              ) : (
+                <ErrorIcon fontSize="inherit" />
+              )} */}
+              {snackbarMessage}
+            </Alert>
+          </Snackbar>
     </>
   )
 }

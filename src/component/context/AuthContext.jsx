@@ -9,7 +9,7 @@ export const AuthProvider = ({children}) => {
         localStorage.setItem('Atoken', token)
         setToken(token)
     }
-
+    // console.log(token)
     const signOut = () => {
         localStorage.removeItem('Atoken')
         setToken(null)

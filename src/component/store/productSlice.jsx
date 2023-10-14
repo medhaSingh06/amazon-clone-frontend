@@ -36,7 +36,7 @@ export default ProductSlice.reducer
 
 // THUNK
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
-    const res = await fetch('http://localhost:3001/product')
+    const res = await fetch('http://localhost:3000/api/products')
     const data = await res.json()
     // console.log(data, "FETCHED DATA")
     return data;

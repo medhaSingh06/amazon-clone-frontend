@@ -11,19 +11,42 @@ import { Alert, Snackbar, SnackbarContent } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UseAuth } from '../context/AuthContext';
+import { addCart, getCart } from '../../api/apiHandler';
+import { useEffect } from 'react';
 export const ProductItem = (props) => {
   const dispatch = useDispatch()
-  const {id,itemName, price, description, imageURL} = props
-
+  const {id,name, price, description, imageURL} = props
+console.log(props, "ITEMMM")
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const {token} = UseAuth()
 
 
   const handleAddToCart = () => {
     if(token){
+
+      const data = {
+        "ProductId" : id,
+        "quantity":1
+      }
+      console.log(data)
+      addCart(data)
+      .then((res) => {
+        if(res.status === 200)
+        {
+
+          console.log(res, "added successfully")
+        }
+        else{
+          console.log("Error", res.status)
+        }
+      })
+      .catch((err) => {
+        console.log("error", err)
+      })
+      
       dispatch(cartActions.addItemToCart({
         id,
-        itemName,
+        name,
         price,
         description,
         imageURL
@@ -38,6 +61,7 @@ export const ProductItem = (props) => {
   }
   
   
+  
   return (
     <Card sx={{ Width: 345 }}>
     <CardMedia
@@ -47,7 +71,7 @@ export const ProductItem = (props) => {
     />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
-        {itemName}
+        {name}
       </Typography>
       <Typography variant="body2" color="text.secondary">
         {description}

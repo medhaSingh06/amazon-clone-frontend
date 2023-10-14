@@ -14,44 +14,54 @@ import { Checkout } from './component/checkout/Checkout'
 import { ErrorPage } from './component/containers/ErrorPage'
 import { UseAuth } from './component/context/AuthContext'
 import { Orders } from './component/checkout/Orders'
+// import {useEffect} from 'react'
+// import { getCart } from './api/apiHandler'
+// import axios from 'axios'
+// import { useEffect } from 'react'
 // import { CheckBox } from '@mui/icons-material'
 function App() {
   
-  // const token = localStorage.getItem('Atoken')
-  const navigate = useNavigate();
+
   const {token} = UseAuth();
+  // getCart().then((res) => {
+  //   console.log(res)
+  // } ).catch((err)=>{
+  //   console.log("error", err)
+  // })
 
   // useEffect(() => {
-  //   if(!token){
-  //     navigate('/signIn')
-  //   }
-  // }, [token, navigate])
- console.log("object")
+
+  //   getCart()
+  //   .then((response) => {
+  //     // Handle the response data here
+  //     console.log(response.data);
+      
+  //   })
+  //   .catch((error) => {
+  //     // Handle errors
+  //     console.error('Error:', error);
+  //   });
+  // }, []); // 
+
+
 
   return (
     <>
     <Layout >
       <Routes>
       <Route path='/product' element={<Products/>} />
+      <Route path='/' element={<HomePage/>}/>
       { token ? (
           <>
-
-        
-        <Route path='/product/:id' element={<ProductDetail/>} />
-        <Route path='/cart' element={<Cart/>} />
-        <Route path='/checkout' element={<Checkout/>} />
-        <Route path='/order' element={<Orders/>} />
-
-       
-        
-
+            <Route path='/product/:id' element={<ProductDetail/>} />
+            <Route path='/cart' element={<Cart/>} />
+            <Route path='/checkout' element={<Checkout/>} />
+            <Route path='/order' element={<Orders/>} />
           </>
         ) : (
           <>
-          <Route path='/' element={<HomePage/>}/>
-        <Route  path='/signIn' element={<Login/>}/>
-        <Route  path='/register' element={<Register/>} />
-
+            <Route  path='/signIn' element={<Login/>}/>
+            <Route  path='/register' element={<Register/>} />
           </>
         )}
       <Route  path='*' element={<ErrorPage/>}/>

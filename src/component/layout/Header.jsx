@@ -26,7 +26,7 @@ export const Header = () => {
             <>
             <Button color='secondary' component={Link} to="/" >Store</Button>
             <Button color='secondary' component={Link} to="/product" >Products</Button>
-            <Button color="secondary" component={Link} to='/register' >Register</Button>
+            {/* <Button color="secondary" component={Link} to='/register' >Register</Button> */}
             <Button color="secondary" component={Link} to="signIn">Sign In</Button>
             </>
          ) : (

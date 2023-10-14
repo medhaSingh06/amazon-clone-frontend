@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Link,  } from 'react-router-dom';
+import { Link, useNavigate,  } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   Avatar,
@@ -25,12 +25,8 @@ export const Register = () => {
     handleSubmit, 
     formState: { errors } 
   } = useForm();
-  const handleSnackbarOpen = (message) => {
-    setIsSnackbarOpen(true)
-  }
-  const handleSnackbarClose = (message) => {
-    setIsSnackbarOpen(false)
-  }
+
+  const navigate = useNavigate()
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -38,24 +34,19 @@ export const Register = () => {
       console.log(res)
       console.log(res.status)
       if(res.status === 201){
-        // first display toaster to verify an email
-        // and then navigate to login
-          handleSnackbarOpen("Please verify from email")
+          alert('registration successfully, please verify your email')
+        navigate('/signIn')
+          // handleSnackbarOpen("Please verify from email")
       }
-      // else{
-      //   console.log("HELLO")
-      //   console.log(res)
-      //   handleSnackbarOpen("Error")
-  // }
-})}
+     
+})
+.catch((err) => {
+  alert(err.response.data.message)
+})
+}
   return (
     <>
-    {token ? (
-      <>
-      <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Already Registered</Typography>
-      </>
-    ) : (
-      <>
+    
     <Container component="main" maxWidth="xs" sx={{bgcolor: 'white'}}>
         <CssBaseline />
         <Box
@@ -126,35 +117,30 @@ export const Register = () => {
               
               <Grid item xs={12} color="white">
                 <TextField
-                  {...register('password', { required: "Name is required", 
+                  {...register('password', { 
+                    required: "Password is required", 
                     minLength: {
                       value: 3,
-                      message: "Name should be greater than 2 characters",
+                      message: "Password should be greater than 2 characters",
                     },
                     maxLength: {
                       value: 20,
-                      message: "Name should be less than 20 characters",
+                      message: "Password should be less than 20 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message: "minimum eight characters, at least one letter and one number",
                     }
-                    // pattern: {
-                    //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                    //   message: "minimum eight characters, at least one letter and one number",
-                    // }
                     })}
                     label="Password"
                     type="password"
                     fullWidth
           error={!!errors.password}
-          helperText={errors.password && "Password is required"}
+          helperText={errors.password && errors.password.message}
         />
               </Grid>
               <Grid  item xs={12} color="white">
               <Typography variant='body2' gutterBottom >Profile Picture</Typography>
-            {/* <Paper elevation={3}>
-            <label htmlFor='profilePicture' style={{cursor: 'pointer'}}>
-          <Input type="file" id="profilePicture" {...register("profilePicture")} gutterBottom color="secondary" />
-          <Button component='span' variant='outlined' color='primary' gutterBottom >Upload Picture</Button>
-          </label>
-            </Paper> */}
             
               </Grid>
             </Grid>
@@ -176,21 +162,9 @@ export const Register = () => {
             </Grid>
           </Box>
         </Box>
-        <Snackbar
-  open={isSnackbarOpen}
-  autoHideDuration={3000} // Adjust the duration as needed (e.g., 3000ms = 3 seconds)
-  onClose={handleSnackbarClose}
-  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
->
-  <Alert >
-    message
-  </Alert>
-</Snackbar>
+        
       </Container>
-      </>
-  )
-    }
-    </>
+     </>
   )
 }
 
