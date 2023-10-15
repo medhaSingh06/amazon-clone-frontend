@@ -4,12 +4,26 @@ import './Layout.css'
 import {Link}  from  'react-router-dom'
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useSelector } from 'react-redux';
 import { UseAuth } from '../context/AuthContext';
+// import { useEffect, useState } from 'react';
+// import { getCart } from '../api/apiHandler';
+import { useSelector } from 'react-redux';
 export const Header = () => {
   
   const {token,signOut} = UseAuth()
+  // const [totalQuantity, setTotalQuantity] = useState()
   const quantity = useSelector(state => state.cart.totalQuantity)
+  console.log(quantity)
+  // useEffect(() => {
+  //   getCart()
+  //   .then(res => {
+  //     setTotalQuantity(res.data.total_quantity)
+  //   })
+  // }, [])
+
+  // useEffect(()=>{
+
+  // },[totalQuantity])
 
   return (
     <AppBar position='fixed'>

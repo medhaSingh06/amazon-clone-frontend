@@ -23,7 +23,6 @@ export const Products = () => {
       rowsPerPage,
       search
     }
-    console.log(products)
     useEffect( () => {
       // check if default value is present or not
       for(const [key, value] of Object.entries(defaultQueryString)){
@@ -47,10 +46,8 @@ export const Products = () => {
       // call get products function
       setLoading(true)
       getProducts({ page, rowsPerPage, search }).then(res => {
-        console.log(res)
           if(res.status===200)
           {
-            console.log(res.data, "dataaaaaa")
             setProducts(res.data.products)
             setTotalProduct(res.data.totalProduct)
             setLoading(false)
@@ -107,11 +104,13 @@ export const Products = () => {
 />
 
 
+
 <Grid container spacing={3}>
   {loading && !initialFetchDone ? (
     <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Loading...</Typography>
   ) : products.length > 0 ? (
     products.map((item) => (
+      
       <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
         <Paper key={item.id} elevation={3} style={{ padding: '20px', margin: '10px' }}>
           <ProductItem

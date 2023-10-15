@@ -29,6 +29,18 @@ export function addCart(data){
     return axiosClient.post("/cart/add", data, config)
     
 }
+
+export function removeFromCart(ProductId) {
+    const config= {
+        headers: {
+            Authorization: localStorage.getItem('Atoken'),
+            'accept-language': 'en',
+        }
+    }
+    console.log(ProductId)
+    return axiosClient.delete("/cart/remove", {data: {ProductId}}, config)
+}
+
 export function getCart(){
     const config = {
         headers: {

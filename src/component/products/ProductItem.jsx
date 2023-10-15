@@ -10,44 +10,72 @@ import { Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UseAuth } from '../../context/AuthContext';
-import { addCart } from '../../api/apiHandler';
+// import { addCart } from '../../api/apiHandler';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../store/cartSlice';
 
 
 export const ProductItem = (props) => {
 
-  
+  const dispatch = useDispatch()
   
   const {id,name, price, description, image} = props
   
-// console.log(props, "ITEMMM")
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const {token} = UseAuth()
   
 
-  const handleAddToCart = () => {
-    if(token){
+  //  const handleAddToCart = () => {
+  //   if(token){
+  //     const data ={
+  //       "ProductId": id,
+  //       "quantity":1
+  //     }
+  //     addCart(data)
+  //     .then((res) => {
+  //       console.log(res, "added successfully", data)
+  //     })
+  //     .catch((err) => {console.log("error", err)})
+  //   }
+  //   setIsSnackbarOpen(true)
+  //  }
+  // const handleAddToCart = () => {
+  //   if(token){
 
-      const data = {
-        "ProductId" : id,
-        "quantity":1
-      }
-      console.log(data)
-      addCart(data)
-      .then((res) => {
-
-          console.log(res, "added successfully")
-        
-      
-      })
-      .catch((err) => {
-        console.log("error", err)
-      })
-    }
+  //     const data = {
+  //       "ProductId" : id,
+  //       "quantity":1
+  //     }
+  //     console.log(data)
+  //     dispatch(addItemToCart(data))
+  //     .then((res) => {
+  //         console.log(res, "added successfully", data)
+  //       })
+  //     .catch((err) => {
+  //       console.log("error", err)
+  //     })
+  //   }
       
     
-    setIsSnackbarOpen(true)
-  }
+  //   setIsSnackbarOpen(true)
+  // }
 
+
+    const handleAddToCart = () => {
+      const data = {
+        "ProductId": id,
+        "quantity": 1,
+      }
+
+      dispatch(addItemToCart(data))
+      .then( (response) => {
+        console.log("Item added to cart", response)
+        setIsSnackbarOpen(true)
+      })
+      .catch( (err) => {
+          console.log("Error in adding item to cart", err)
+      })
+    }
   const handleSnackbarClose = () => {
     setIsSnackbarOpen(false)
   }

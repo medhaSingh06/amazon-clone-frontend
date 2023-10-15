@@ -1,28 +1,29 @@
 import { Container, Grid, Typography,Paper, Button, Card, CardMedia, CardActions } from '@mui/material'
-import { useDispatch } from 'react-redux'
-import { cartActions } from '../../store/cartSlicewsd'
+
+// import { cartActions } from '../../store/cartSlicewsd'
+import { removeItemFromCart } from '../../store/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
 export const CartItem = (props) => {
-  const {id,itemName, quantity, price, description, image} = props
+  // const {id,itemName, quantity, price, description, image} = props
+const {id, name, quantity, price, image} = props
+// console.log(props, "PROPS")
+  
+const dispatch = useDispatch()
+// const totalQuantity = useSelector()
 
-  // const dispatch = useDispatch()
+const handleRemove = () => {
+  console.log(id);
+  const ProductId = id;
+  console.log(ProductId);
 
-  // const addItemHandler = () => {
-  //   dispatch(cartActions.addItemToCart({
-  //     id,
-  //     itemName,
-  //     price,
-  //     description, 
-  //     image
-  //   }))
-  // }
-
-  // const removeItemHandler = () => {
-  //   dispatch(cartActions.removeItemFromCart(id))
-  // }
-
-  // const removeEntireItem = () => {
-  //   dispatch(cartActions.removeEntireItem(id))
-  // }
+  dispatch(removeItemFromCart(ProductId))
+    .then(() => {
+      console.log("Item removed from cart");
+    })
+    .catch((error) => {
+      console.log("Error removing item from cart:", error);
+    });
+};
 
   return (
     <Container maxWidth="sm" sx={{ width: '100%', minHeight: '400px' }}>
@@ -34,17 +35,14 @@ export const CartItem = (props) => {
             component="img"
             height="140"
             image={image}
-            alt={itemName}
+            alt={name}
           />
         </Card>
       </Grid>
       <Grid item xs={12} sm={6}>
         {/* Text content goes here */}
         <Typography variant="h4" color="primary" gutterBottom>
-          {itemName}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {description}
+          {name}
         </Typography>
         <Typography variant="body2" color="secondary">
           Price: {price}
@@ -59,7 +57,7 @@ export const CartItem = (props) => {
                    <Button size="small" color="secondary"  variant='outlined'>
                      -
                    </Button>
-                   <Button variant="outlined" color="secondary" >
+                   <Button variant="outlined" color="secondary" onClick={handleRemove}>
                      Remove
                    </Button>
                  </CardActions>
