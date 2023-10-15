@@ -26,6 +26,6 @@ export function getCart(){
     return axiosClient.get("/cart", config)
 }
 
-export function getProduct(){
-    return axiosClient.get('/products')
+export function getProducts(data){
+    return axiosClient.get(`/products?page=${data.page+1}&productsPerPage=${data.rowsPerPage}&search=${data.search}`, data)
 }

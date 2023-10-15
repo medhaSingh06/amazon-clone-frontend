@@ -1,6 +1,6 @@
 import { Container, Grid, Typography,Paper, Button, Card, CardMedia, CardActions } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { cartActions } from '../store/cartSlice'
+import { cartActions } from '../../store/cartSlice'
 export const CartItem = (props) => {
   const {id,itemName, quantity, price, description, image} = props
 

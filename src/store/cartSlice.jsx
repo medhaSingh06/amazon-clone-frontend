@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getCart } from "../api/apiHandler";
 
 const initialCartState = {
   items: [],
@@ -19,10 +20,10 @@ const CartSlice = createSlice({
         state.items.push({
           id: newItem.id,
           quantity: 1,
-          itemName: newItem.itemName,
+          name: newItem.name,
           price: newItem.price,
           description: newItem.description,
-          imageURL: newItem.imageURL
+          image: newItem.image
         });
         
       } else {
@@ -62,3 +63,15 @@ const CartSlice = createSlice({
 
 export const cartActions = CartSlice.actions
 export default CartSlice.reducer
+
+
+// THUNK
+export const fetchCart = createAsyncThunk("cart/fetchCart", async() => {
+  try {
+    const res  = await getCart()
+    console.log(res.data)
+  }
+  catch (err){
+    console.log(err)
+  }
+})

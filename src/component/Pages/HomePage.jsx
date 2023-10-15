@@ -1,5 +1,5 @@
 
-import { UseAuth } from '../context/AuthContext'
+import { UseAuth } from '../../context/AuthContext'
 import { Typography } from '@mui/material'
 
 

@@ -19,7 +19,7 @@ import {
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { userLogin } from '../../api/apiHandler';
-import { UseAuth } from '../context/AuthContext';
+import { UseAuth } from '../../context/AuthContext';
 import { useState } from 'react';
 export const Login = () => {
 

@@ -5,17 +5,20 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { cartActions } from '../store/cartSlice';
+import { cartActions } from '../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Snackbar, SnackbarContent } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UseAuth } from '../context/AuthContext';
-import { addCart, getCart } from '../../api/apiHandler';
-import { useEffect } from 'react';
+import { UseAuth } from '../../context/AuthContext';
+import { addCart } from '../../api/apiHandler';
+
 export const ProductItem = (props) => {
+
+  
+  
   const dispatch = useDispatch()
-  const {id,name, price, description, imageURL} = props
+  const {id,name, price, description, image} = props
 console.log(props, "ITEMMM")
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const {token} = UseAuth()
@@ -49,7 +52,7 @@ console.log(props, "ITEMMM")
         name,
         price,
         description,
-        imageURL
+        image
       }))  
     }
     
@@ -63,10 +66,11 @@ console.log(props, "ITEMMM")
   
   
   return (
+    <>
     <Card sx={{ Width: 345 }}>
     <CardMedia
       sx={{ height: 140 }}
-      image={imageURL}
+      image={image}
       title="green iguana"
     />
     <CardContent>
@@ -108,6 +112,8 @@ console.log(props, "ITEMMM")
       </Snackbar>
     </CardActions>
   </Card>
+  
+  </>
   )
 }
 
