@@ -1,28 +1,28 @@
-import * as React from 'react';
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { cartActions } from '../../store/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { Alert, Snackbar, SnackbarContent } from '@mui/material';
+
+import { Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UseAuth } from '../../context/AuthContext';
 import { addCart } from '../../api/apiHandler';
 
+
 export const ProductItem = (props) => {
 
   
   
-  const dispatch = useDispatch()
   const {id,name, price, description, image} = props
-console.log(props, "ITEMMM")
+  
+// console.log(props, "ITEMMM")
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const {token} = UseAuth()
-
+  
 
   const handleAddToCart = () => {
     if(token){
@@ -34,27 +34,16 @@ console.log(props, "ITEMMM")
       console.log(data)
       addCart(data)
       .then((res) => {
-        if(res.status === 200)
-        {
 
           console.log(res, "added successfully")
-        }
-        else{
-          console.log("Error", res.status)
-        }
+        
+      
       })
       .catch((err) => {
         console.log("error", err)
       })
-      
-      dispatch(cartActions.addItemToCart({
-        id,
-        name,
-        price,
-        description,
-        image
-      }))  
     }
+      
     
     setIsSnackbarOpen(true)
   }
@@ -84,7 +73,7 @@ console.log(props, "ITEMMM")
     <CardActions>
       <Button size="small" color='primary'sx={{ fontWeight: 'bold' }} >₹{price}</Button>
       <Button size="small" onClick={handleAddToCart} color='primary' sx={{ fontWeight: 'bold' }}>Add to Cart</Button>
-      <Button size="small" color='primary' component={Link} to={`/product/${id}`}  sx={{ fontWeight: 'bold' }}>View Product</Button>
+      {/* <Button size="small" color='primary' component={Link} to={`/product/${id}`}  sx={{ fontWeight: 'bold' }}>View Product</Button> */}
 
       <Snackbar 
       open={isSnackbarOpen}
@@ -97,6 +86,7 @@ console.log(props, "ITEMMM")
               onClose={handleSnackbarClose}
               severity="success"
               sx={{ width: '100%' }}
+
             >
               Product added to cart
             </Alert>

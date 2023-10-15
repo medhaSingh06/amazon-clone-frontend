@@ -1,35 +1,14 @@
 
 import {Typography, Paper, Grid, TextField, InputAdornment, TablePagination} from '@mui/material'
-// import { DUMMY_ITEMS } from '../../MenuData'
 import {ProductItem} from './ProductItem'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-// import { fetchProducts } from '../../store/productSlice'
 import SearchIcon from '@mui/icons-material/Search';
-// import {STATUS} from '../../store/productSlice'
-import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import { getProducts } from '../../api/apiHandler';
 
 
 export const Products = () => {
-  // const token = localStorage.getItem('Atoken')
-
    
-    // const dispatch = useDispatch()
-
-    // const {data: products, status} = useSelector(state => state.product)
-    // console.log(products, "fewdsa")
-    // useEffect(() => {
-    //     dispatch(fetchProducts())
-    // }, [])
-    // if(status === STATUS.LOADING) {
-    //   return <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Loading...</Typography>
-    // }
-    
-    // if(status === STATUS.ERROR){
-    //   return <Typography variant="h4" color='secondary' sx={{ textAlign: 'center', paddingTop: '20px' }}>Something went wrong</Typography>
-    // }  
     const [searchParams, setSearchParams] = useSearchParams()
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -68,14 +47,17 @@ export const Products = () => {
       // call get products function
       setLoading(true)
       getProducts({ page, rowsPerPage, search }).then(res => {
-        console.log(res.data.products
-          )
+        console.log(res)
+          if(res.status===200)
+          {
+            console.log(res.data, "dataaaaaa")
+            setProducts(res.data.products)
+            setTotalProduct(res.data.totalProduct)
+            setLoading(false)
+            setInitialFetchDone(true);
+          }
 
-          console.log(res.data)
-          setProducts(res.data.products)
-          setTotalProduct(res.data.totalProduct)
-          setLoading(false)
-          setInitialFetchDone(true);
+          
         
       })
     }, [searchParams])

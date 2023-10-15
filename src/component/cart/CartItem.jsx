@@ -1,28 +1,28 @@
 import { Container, Grid, Typography,Paper, Button, Card, CardMedia, CardActions } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { cartActions } from '../../store/cartSlice'
+import { cartActions } from '../../store/cartSlicewsd'
 export const CartItem = (props) => {
   const {id,itemName, quantity, price, description, image} = props
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  const addItemHandler = () => {
-    dispatch(cartActions.addItemToCart({
-      id,
-      itemName,
-      price,
-      description, 
-      image
-    }))
-  }
+  // const addItemHandler = () => {
+  //   dispatch(cartActions.addItemToCart({
+  //     id,
+  //     itemName,
+  //     price,
+  //     description, 
+  //     image
+  //   }))
+  // }
 
-  const removeItemHandler = () => {
-    dispatch(cartActions.removeItemFromCart(id))
-  }
+  // const removeItemHandler = () => {
+  //   dispatch(cartActions.removeItemFromCart(id))
+  // }
 
-  const removeEntireItem = () => {
-    dispatch(cartActions.removeEntireItem(id))
-  }
+  // const removeEntireItem = () => {
+  //   dispatch(cartActions.removeEntireItem(id))
+  // }
 
   return (
     <Container maxWidth="sm" sx={{ width: '100%', minHeight: '400px' }}>
@@ -53,13 +53,13 @@ export const CartItem = (props) => {
         Quantity: {quantity}
         </Typography>
         <CardActions>
-              <Button size="small" color="secondary" onClick={addItemHandler} variant='outlined'>
+              <Button size="small" color="secondary" variant='outlined'>
                      +
                    </Button>
-                   <Button size="small" color="secondary" onClick={removeItemHandler} variant='outlined'>
+                   <Button size="small" color="secondary"  variant='outlined'>
                      -
                    </Button>
-                   <Button variant="outlined" color="secondary" onClick={removeEntireItem}>
+                   <Button variant="outlined" color="secondary" >
                      Remove
                    </Button>
                  </CardActions>

@@ -14,8 +14,8 @@ import { Checkout } from './component/checkout/Checkout'
 import { ErrorPage } from './component/Pages/ErrorPage'
 import { UseAuth } from './context/AuthContext'
 import { Orders } from './component/checkout/Orders'
-// import {useEffect} from 'react'
-// import { getCart } from './api/apiHandler'
+import {useEffect} from 'react'
+import { getCart } from './api/apiHandler'
 // import axios from 'axios'
 // import { useEffect } from 'react'
 // import { CheckBox } from '@mui/icons-material'
@@ -34,7 +34,7 @@ function App() {
   //   getCart()
   //   .then((response) => {
   //     // Handle the response data here
-  //     console.log(response.data);
+  //     console.log(response.data, "ACES");
       
   //   })
   //   .catch((error) => {
