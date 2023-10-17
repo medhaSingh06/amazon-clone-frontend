@@ -1,23 +1,21 @@
+/* eslint-disable react/no-unescaped-entities */
 
 import { useForm } from 'react-hook-form';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
   Container,
   Snackbar,
-  Alert
+  Alert,
 } from '@mui/material'
-import ErrorIcon from '@mui/icons-material/Error';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
 import { userLogin } from '../../api/apiHandler';
 import { UseAuth } from '../../context/AuthContext';
 import { useState } from 'react';
@@ -46,8 +44,8 @@ export const Login = () => {
           if(res.status === 200){
 
             signIn(res.data.token)
-            // setSnackbarSeverity('success')
-            // setSnackbarMessage(res.data.message)
+            setSnackbarSeverity('success')
+            setSnackbarMessage(res.data.message)
             navigate('/')
           }
          
@@ -140,11 +138,12 @@ export const Login = () => {
       </Container>
       <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={handleSnackbarClose}>
             <Alert severity={snackbarSeverity}>
-              {/* {snackbarSeverity === 'success' ? (
+               {/* {snackbarSeverity === 'success' ? (
                 <CheckCircleIcon fontSize="inherit" />
+
               ) : (
                 <ErrorIcon fontSize="inherit" />
-              )} */}
+              )}  */}
               {snackbarMessage}
             </Alert>
           </Snackbar>

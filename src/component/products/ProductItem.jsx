@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -24,42 +25,6 @@ export const ProductItem = (props) => {
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false)
   const {token} = UseAuth()
   
-
-  //  const handleAddToCart = () => {
-  //   if(token){
-  //     const data ={
-  //       "ProductId": id,
-  //       "quantity":1
-  //     }
-  //     addCart(data)
-  //     .then((res) => {
-  //       console.log(res, "added successfully", data)
-  //     })
-  //     .catch((err) => {console.log("error", err)})
-  //   }
-  //   setIsSnackbarOpen(true)
-  //  }
-  // const handleAddToCart = () => {
-  //   if(token){
-
-  //     const data = {
-  //       "ProductId" : id,
-  //       "quantity":1
-  //     }
-  //     console.log(data)
-  //     dispatch(addItemToCart(data))
-  //     .then((res) => {
-  //         console.log(res, "added successfully", data)
-  //       })
-  //     .catch((err) => {
-  //       console.log("error", err)
-  //     })
-  //   }
-      
-    
-  //   setIsSnackbarOpen(true)
-  // }
-
 
     const handleAddToCart = () => {
       const data = {

@@ -16,6 +16,8 @@ import { UseAuth } from './context/AuthContext'
 import { Orders } from './component/checkout/Orders'
 import {useEffect} from 'react'
 import { getCart } from './api/apiHandler'
+import { useDispatch } from 'react-redux'
+import { fetchCart } from './store/cartSlice'
 // import axios from 'axios'
 // import { useEffect } from 'react'
 // import { CheckBox } from '@mui/icons-material'
@@ -23,25 +25,17 @@ function App() {
   
 
   const {token} = UseAuth();
-  // getCart().then((res) => {
-  //   console.log(res)
-  // } ).catch((err)=>{
-  //   console.log("error", err)
-  // })
-
-  // useEffect(() => {
-
-  //   getCart()
-  //   .then((response) => {
-  //     // Handle the response data here
-  //     console.log(response.data, "ACES");
-      
-  //   })
-  //   .catch((error) => {
-  //     // Handle errors
-  //     console.error('Error:', error);
-  //   });
-  // }, []); // 
+  const dispatch =  useDispatch()
+  // here it will getCart values from the 
+  useEffect(() => {
+    dispatch(fetchCart())
+    .then((response) => {
+      console.log("Data fetched Successfully!!", response)
+    })
+    .catch((error) => {
+      console.log("Error in data fetching", error)
+    })
+  }, [])
 
 
 

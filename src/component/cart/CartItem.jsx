@@ -1,11 +1,11 @@
 import { Container, Grid, Typography,Paper, Button, Card, CardMedia, CardActions } from '@mui/material'
 
 // import { cartActions } from '../../store/cartSlicewsd'
-import { removeItemFromCart } from '../../store/cartSlice'
+import { removeItemFromCart, updateItemOfCart } from '../../store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 export const CartItem = (props) => {
   // const {id,itemName, quantity, price, description, image} = props
-const {id, name, quantity, price, image} = props
+const {id, name,  quantity, price, image} = props
 // console.log(props, "PROPS")
   
 const dispatch = useDispatch()
@@ -25,6 +25,24 @@ const handleRemove = () => {
     });
 };
 
+  const handleUpdateQty = (id, quantity) => {
+    const data = {
+      "ProductId": id,
+      "quantity": quantity
+    }
+    console.log(data)
+    dispatch(updateItemOfCart(data))
+    .then((response) => {
+      console.log("item updated to cart", response)
+    })
+    .catch( (err) => {
+      console.log("Error in updating the cart", err)
+    })
+
+  }
+
+
+
   return (
     <Container maxWidth="sm" sx={{ width: '100%', minHeight: '400px' }}>
     <Paper elevation={3} sx={ {bgcolor: "#323533"}}>
@@ -42,7 +60,7 @@ const handleRemove = () => {
       <Grid item xs={12} sm={6}>
         {/* Text content goes here */}
         <Typography variant="h4" color="primary" gutterBottom>
-          {name}
+          NAME: {name}
         </Typography>
         <Typography variant="body2" color="secondary">
           Price: {price}
@@ -51,13 +69,13 @@ const handleRemove = () => {
         Quantity: {quantity}
         </Typography>
         <CardActions>
-              <Button size="small" color="secondary" variant='outlined'>
+              <Button size="small" color="secondary" variant='outlined' onClick={() => handleUpdateQty(id,quantity+1)}>
                      +
                    </Button>
-                   <Button size="small" color="secondary"  variant='outlined'>
+                   <Button size="small" color="secondary"  variant='outlined' onClick={() => handleUpdateQty(id, quantity-1)}>
                      -
                    </Button>
-                   <Button variant="outlined" color="secondary" onClick={handleRemove}>
+                   <Button variant="outlined" color="secondary" onClick={handleRemove} >
                      Remove
                    </Button>
                  </CardActions>
