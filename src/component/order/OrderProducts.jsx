@@ -1,25 +1,17 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import { Card, CardMedia, Container, Grid, TableCell, TableRow, Typography } from '@mui/material';
 
 export const OrderProducts = (props) => {
-    const {productPrice, productName, productImage} = props
-    // console.log(productImage)
+  const { productName, productPrice  } = props;
+
   return (
-    
-        <Card sx={{ Width: 345 }}>
-    <CardMedia
-      sx={{ height: 140 }}
-      image={productImage}
-      title="green iguana"
-    />
-    <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
-        {productName}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        {productPrice}
-      </Typography>
-    </CardContent>
-    </Card>
-  )
-}
+    <TableRow>
+    <TableCell>
+      <Typography variant='body2'>{productName}</Typography>
+    </TableCell>
+    <TableCell>
+    <Typography variant="body2">{productPrice}</Typography>
+    </TableCell>
+      </TableRow>
+  );
+};

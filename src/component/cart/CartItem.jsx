@@ -48,10 +48,9 @@ const handleRemove = () => {
     <Paper elevation={3} sx={ {bgcolor: "#323533"}}>
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
-        <Card>
+        <Card sx={{ Width: 200 }}>
           <CardMedia
-            component="img"
-            height="140"
+            sx={{ height: 140 }}
             image={image}
             alt={name}
           />
@@ -59,8 +58,8 @@ const handleRemove = () => {
       </Grid>
       <Grid item xs={12} sm={6}>
         {/* Text content goes here */}
-        <Typography variant="h4" color="primary" gutterBottom>
-          NAME: {name}
+        <Typography variant="h5" color="primary" gutterBottom>
+          {name}
         </Typography>
         <Typography variant="body2" color="secondary">
           Price: {price}
@@ -72,7 +71,7 @@ const handleRemove = () => {
               <Button size="small" color="secondary" variant='outlined' onClick={() => handleUpdateQty(id,quantity+1)}>
                      +
                    </Button>
-                   <Button size="small" color="secondary"  variant='outlined' onClick={() => handleUpdateQty(id, quantity-1)}>
+                   <Button size="small" color="secondary"  variant='outlined' onClick={() => handleUpdateQty(id, quantity-1)} disabled={quantity === 1}>
                      -
                    </Button>
                    <Button variant="outlined" color="secondary" onClick={handleRemove} >

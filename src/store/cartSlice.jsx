@@ -21,7 +21,7 @@ const CartSlice = createSlice({
                     state.totalQuantity =0
                 })
                 .addCase(fetchCart.fulfilled, (state, action) =>{
-                    // console.log(action.payload)
+                    console.log(action.payload, "get cart")
                     for(const item of action.payload.cart_items){
                         // console.log(item)
                         // console.log(state.items.ProductId)
@@ -41,7 +41,7 @@ const CartSlice = createSlice({
                   
                     })
                 .addCase(addItemToCart.fulfilled, (state, action) => {
-                    // console.log(action.payload)
+                    console.log(action.payload)
                     const newItem = action.payload
                     // console.log(newItem, "NEWITEM")
                     const existingItem = state.items.find((item) => item.ProductId === newItem.ProductId)
@@ -70,7 +70,7 @@ const CartSlice = createSlice({
 
                 .addCase(updateItemOfCart.fulfilled, (state, action) => {
                     const val = action.payload
-                    // console.log(val)
+                    console.log(val)
                     for(const item of state.items) {
                         if(item.ProductId === val.ProductId)
                         {

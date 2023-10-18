@@ -29,8 +29,9 @@ const OrderSlice = createSlice({
                         }
                     })
                 .addCase(fetchOrder.fulfilled, (state, action) => {
-                    console.log(action.payload, "FETECHED FROM SLICE")
-                    state.orderDetails.push(...action.payload.orders)
+                    console.log(action.payload, "FETCHED FROM SLICE")
+                    
+                    state.orderDetails.concat(action.payload.orders)
                     state.loading = false
                     
 

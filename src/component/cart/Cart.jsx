@@ -8,18 +8,28 @@ import { fetchCart, removeAllItemsFromCart } from '../../store/cartSlice'
 import { useEffect } from 'react'
 import { addOrderToOrder } from '../../store/orderSlice'
 import { addOrder } from '../../api/apiHandler'
+import { UseAuth } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
 // import { useEffect, useState } from 'react'
 // import { fetchCart } from '../../store/cartSlice'
 // import { useSelector } from 'react-redux'
 // import { getCart } from '../../api/apiHandler'
 export const Cart = () => {
 
-
+  const {token} = UseAuth()
   const cartItems = useSelector(state => state.cart.items)
   const totalPrice = useSelector(state => state.cart.totalPrice)
   const totalQuantity = useSelector(state => state.cart.totalQuantity)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchData = async () => {
+         await dispatch(fetchCart());
+    };
+  
+    fetchData();
+  }, []);
   const handleCheckout = () => {
     const data ={
       shipping: {
@@ -29,7 +39,7 @@ export const Cart = () => {
       },
       paymentMethod: "cash"
     }
-    dispatch(addOrderToOrder(data))
+    addOrder(data)
     .then((res) => {
       console.log("Order added successfully", res)
       return dispatch(removeAllItemsFromCart())
@@ -54,13 +64,14 @@ export const Cart = () => {
   }
   return (
     <div>
-    <Typography variant="h4" gutterBottom color='secondary'>
-    Shopping Cart
-  </Typography>
+    { !token ? ( <Typography>You are an unauthorized user.{' '}
+          <Link to="/signin">Sign in</Link> to check your cart.</Typography>) : (
+            <>
+            <Typography variant="h4" gutterBottom color='secondary'>Shopping Cart</Typography>
   <Button 
   variant="contained" 
   color="primary" 
-  
+  disabled={cartItems.length <= 0}
   onClick={handleRemoveAll}
   >
         RemoveAll
@@ -104,6 +115,11 @@ export const Cart = () => {
         Checkout
       </Button>
       </Grid>
+      </>
+          ) 
+
+    }
+    
 </div>
     
   )

@@ -35,14 +35,6 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
          await dispatch(fetchCart());
-        // console.log("Data fetched successfully:", cartitem);
-  
-        // After the first action is completed, dispatch the second action
-        const orderItem =await dispatch(fetchOrder());
-        console.log("Second action completed:", orderItem);
-      // } catch (error) {
-      //   console.error("Error in data fetching:", error);
-      // }
     };
   
     fetchData();
@@ -56,20 +48,18 @@ function App() {
       <Routes>
       <Route path='/product' element={<Products/>} />
       <Route path='/' element={<HomePage/>}/>
-      { token ? (
-          <>
+     
+          
             <Route path='/product/:id' element={<ProductDetail/>} />
             <Route path='/cart' element={<Cart/>} />
             <Route path='/checkout' element={<Checkout/>} />
             {/* <Route path='/order' element={<Orders/>} /> */}
             <Route path='/order' element={<Order/>} />
-          </>
-        ) : (
-          <>
+          
             <Route  path='/signIn' element={<Login/>}/>
             <Route  path='/register' element={<Register/>} />
-          </>
-        )}
+         
+        
       <Route  path='*' element={<ErrorPage/>}/>
       </Routes> 
     </Layout>   
