@@ -15,11 +15,16 @@ const CartSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
             builder
+                .addCase(fetchCart.rejected, (state, action) => {
+                    state.items =[]
+                    state.totalPrice=0
+                    state.totalQuantity =0
+                })
                 .addCase(fetchCart.fulfilled, (state, action) =>{
-                    console.log(action.payload)
+                    // console.log(action.payload)
                     for(const item of action.payload.cart_items){
-                        console.log(item)
-                        console.log(state.items.ProductId)
+                        // console.log(item)
+                        // console.log(state.items.ProductId)
                         const val = {
                             ProductId:item.product_id,
                             ProductName: item.product_name,
@@ -33,14 +38,12 @@ const CartSlice = createSlice({
                     state.totalPrice = action.payload.total_price
                     state.totalQuantity = action.payload.total_quantity
 
-                    // state.items  = action.payload.cartitems
-                    // state.totalPrice = action.payload.totalprice
-                    // state.totalQuantity = action.payload.totalquantity
+                  
                     })
                 .addCase(addItemToCart.fulfilled, (state, action) => {
-                    console.log(action.payload)
+                    // console.log(action.payload)
                     const newItem = action.payload
-                    console.log(newItem, "NEWITEM")
+                    // console.log(newItem, "NEWITEM")
                     const existingItem = state.items.find((item) => item.ProductId === newItem.ProductId)
                     state.totalPrice = state.totalPrice + newItem.total_price
                     state.totalQuantity++;
@@ -55,9 +58,9 @@ const CartSlice = createSlice({
 
                 })
                 .addCase(removeItemFromCart.fulfilled, (state, action) => {
-                    console.log(action.payload)
+                    // console.log(action.payload)
                     const ProductId = action.payload.ProductId
-                    console.log(ProductId, "PRODUCTTTT")
+                    // console.log(ProductId, "PRODUCTTTT")
                     const existingItem = state.items.find( (item) => item.ProductId === ProductId )
                     state.totalPrice = state.totalPrice - existingItem.total_price
                     state.totalQuantity = state.totalQuantity - existingItem.quantity
@@ -67,6 +70,7 @@ const CartSlice = createSlice({
 
                 .addCase(updateItemOfCart.fulfilled, (state, action) => {
                     const val = action.payload
+                    // console.log(val)
                     for(const item of state.items) {
                         if(item.ProductId === val.ProductId)
                         {
@@ -101,7 +105,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async  () => {
     try {
             const res = await getCart()
             
-            console.log(res, "FETCHED CART")
+            // console.log(res, "FETCHED CART")
             const values = res.data
             // const values = {
             //     cartitems: res.data.cart_items,
@@ -116,17 +120,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async  () => {
      
 })
 
-// export const addItemToCart = createAsyncThunk('cart/addItemToCart', async (item) => {
-//     try{
-//         console.log(item)
-//         const res = await addCart(item)
-//         console.log("helloo")
-//         console.log(res, 'RES')
-//         return res;
-//     } catch (err){
-//         console.error(err)
-//     }
-// })
+
 
 export const addItemToCart = createAsyncThunk('cart/addItemToCart', async (item) => {
     try {
@@ -146,12 +140,12 @@ export const addItemToCart = createAsyncThunk('cart/addItemToCart', async (item)
 export const removeItemFromCart = createAsyncThunk('cart/removeItemFromCart', async (ProductId) => {
     try {
         const res = await removeFromCart(ProductId);
-        console.log(res)
+        // console.log(res)
         // Check the response for success or other relevant data
         if (res.status === 200) {
-            console.log("vewfdcs")
+            // console.log("vewfdcs")
             const val = res.data.item
-            console.log(val, "VAL")
+            // console.log(val, "VAL")
             return val;
         } else {
             throw new Error('Failed to remove item from cart');

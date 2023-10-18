@@ -13,7 +13,7 @@ export const Header = () => {
   const {token,signOut} = UseAuth()
   // const [totalQuantity, setTotalQuantity] = useState()
   const quantity = useSelector(state => state.cart.totalQuantity)
-  console.log(quantity)
+  // console.log(quantity)
   // useEffect(() => {
   //   getCart()
   //   .then(res => {
@@ -38,7 +38,7 @@ export const Header = () => {
           
          { !token ? (
             <>
-            <Button color='secondary' component={Link} to="/" >Store</Button>
+            {/* <Button color='secondary' component={Link} to="/" >Store</Button> */}
             <Button color='secondary' component={Link} to="/product" >Products</Button>
             {/* <Button color="secondary" component={Link} to='/register' >Register</Button> */}
             <Button color="secondary" component={Link} to="signIn">Sign In</Button>
@@ -46,7 +46,7 @@ export const Header = () => {
          ) : (
           <>
   
-          <Button color='secondary' component={Link} to="/" >Store</Button>
+          {/* <Button color='secondary' component={Link} to="/" >Store</Button> */}
           <Button color='secondary' component={Link} to="/product" >Products</Button>
           <Button color='secondary' component={Link} to='/cart' ><Badge
         badgeContent={quantity}

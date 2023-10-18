@@ -52,3 +52,7 @@ export function removeAllCart(){
 export function getOrder(){
     return axiosClient.get("/orders/history", config)
 }
+
+export function addOrder(data) {
+    return axiosClient.post("/orders/place", data, config)
+}

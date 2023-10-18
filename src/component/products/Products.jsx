@@ -11,7 +11,7 @@ export const Products = () => {
    
     const [searchParams, setSearchParams] = useSearchParams()
     const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(5)
+    const [rowsPerPage, setRowsPerPage] = useState(10)
     const [search, setSearch] = useState('')
     const [totalProduct, setTotalProduct] = useState()
     const [products, setProducts] = useState([])

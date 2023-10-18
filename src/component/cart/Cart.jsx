@@ -6,22 +6,43 @@ import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCart, removeAllItemsFromCart } from '../../store/cartSlice'
 import { useEffect } from 'react'
+import { addOrderToOrder } from '../../store/orderSlice'
+import { addOrder } from '../../api/apiHandler'
 // import { useEffect, useState } from 'react'
 // import { fetchCart } from '../../store/cartSlice'
 // import { useSelector } from 'react-redux'
 // import { getCart } from '../../api/apiHandler'
 export const Cart = () => {
 
-  
+
   const cartItems = useSelector(state => state.cart.items)
   const totalPrice = useSelector(state => state.cart.totalPrice)
   const totalQuantity = useSelector(state => state.cart.totalQuantity)
   const navigate = useNavigate()
-  const handleCheckout = () => {
-    navigate('/checkout')
-  }
-  console.log(cartItems)
   const dispatch = useDispatch()
+  const handleCheckout = () => {
+    const data ={
+      shipping: {
+        street: "street",
+        city: "city",
+        zipCode: "zipCode"
+      },
+      paymentMethod: "cash"
+    }
+    dispatch(addOrderToOrder(data))
+    .then((res) => {
+      console.log("Order added successfully", res)
+      return dispatch(removeAllItemsFromCart())
+    })
+    .then(() => {
+      console.log("All items removed from the cart")
+      navigate('/checkout')
+    })
+    .catch((err) => {
+      console.log("Error in adding order or removing items", err)
+    })
+  }
+  // console.log(cartItems)
   const handleRemoveAll =() => {  
       dispatch(removeAllItemsFromCart())
       .then((response) => {

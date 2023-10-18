@@ -66,7 +66,8 @@ export const ProductItem = (props) => {
     <CardActions>
       <Button size="small" color='primary'sx={{ fontWeight: 'bold' }} >₹{price}</Button>
       <Button size="small" onClick={handleAddToCart} color='primary' sx={{ fontWeight: 'bold' }}>Add to Cart</Button>
-      {/* <Button size="small" color='primary' component={Link} to={`/product/${id}`}  sx={{ fontWeight: 'bold' }}>View Product</Button> */}
+      <Button size="small" color='primary' compone
+      nt={Link} to={`/product/${id}`}  sx={{ fontWeight: 'bold' }}>View Product</Button>
 
       <Snackbar 
       open={isSnackbarOpen}

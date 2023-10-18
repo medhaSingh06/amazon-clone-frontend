@@ -12,9 +12,9 @@ const dispatch = useDispatch()
 // const totalQuantity = useSelector()
 
 const handleRemove = () => {
-  console.log(id);
+  // console.log(id);
   const ProductId = id;
-  console.log(ProductId);
+  // console.log(ProductId);
 
   dispatch(removeItemFromCart(ProductId))
     .then(() => {
@@ -30,7 +30,7 @@ const handleRemove = () => {
       "ProductId": id,
       "quantity": quantity
     }
-    console.log(data)
+    // console.log(data)
     dispatch(updateItemOfCart(data))
     .then((response) => {
       console.log("item updated to cart", response)
