@@ -16,14 +16,6 @@ export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(fetchCart());
-    };
-
-    fetchData();
-  }, []);
-
   const handleCheckout = () => {
     const data = {
       shipping: {
@@ -56,6 +48,7 @@ export const Cart = () => {
         console.log("error in removing", error);
       });
   };
+
   return (
     <div>
       {!token ? (
@@ -80,7 +73,11 @@ export const Cart = () => {
         </Box>
       ) : (
         <>
-          <Typography variant="h4" gutterBottom color="secondary">
+          
+
+          {cartItems.length > 0 ? (
+            <>
+            <Typography variant="h4" gutterBottom color="secondary">
             Shopping Cart
           </Typography>
           <Button
@@ -91,9 +88,7 @@ export const Cart = () => {
           >
             RemoveAll
           </Button>
-
-          {cartItems.length > 0 ? (
-            cartItems.map((item) => (
+              {cartItems.map((item) => (
               <CartItem
                 key={item.ProductId}
                 id={item.ProductId}
@@ -102,39 +97,47 @@ export const Cart = () => {
                 price={item.total_price}
                 image={item.image}
               />
-            ))
+              ))}
+              <Grid item xs={12} sm={6} sx={{ textAlign: "right" }}>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  color="secondary"
+                  align="right"
+                >
+                  TotalPrice: {totalPrice}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  color="secondary"
+                  align="right"
+                >
+                  TotalQuantity: {totalQuantity}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={cartItems.length <= 0}
+                  onClick={handleCheckout}
+                >
+                  Checkout
+                </Button>
+              </Grid>
+            </>
           ) : (
-            <Typography variant="h4" gutterBottom color="#3A3E3B">
-              Cart is empty.
-            </Typography>
+            <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="98vh"
+      padding="16px"
+    >
+    <Typography variant="h4" gutterBottom color='secondary'>Cart is Empty
+    </Typography>
+    </Box>
           )}
-
-          <Grid item xs={12} sm={6} sx={{ textAlign: "right" }}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              color="secondary"
-              align="right"
-            >
-              TotalPrice: {totalPrice}
-            </Typography>
-            <Typography
-              variant="h6"
-              gutterBottom
-              color="secondary"
-              align="right"
-            >
-              TotalQuantity: {totalQuantity}
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={cartItems.length <= 0}
-              onClick={handleCheckout}
-            >
-              Checkout
-            </Button>
-          </Grid>
         </>
       )}
     </div>

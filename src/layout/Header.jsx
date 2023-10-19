@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import "./Layout.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { UseAuth } from "../context/AuthContext";
@@ -17,8 +17,8 @@ import { UseAuth } from "../context/AuthContext";
 import { useSelector } from "react-redux";
 export const Header = () => {
   const { token, signOut } = UseAuth();
+  const navigate = useNavigate();
   const quantity = useSelector((state) => state.cart.totalQuantity);
-
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -27,6 +27,9 @@ export const Header = () => {
           edge="start"
           color="secondary"
           aria-label="logo"
+          onClick={() => {
+            navigate("/");
+          }}
         >
           <LocalMallOutlinedIcon />
         </IconButton>

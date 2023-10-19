@@ -12,7 +12,6 @@ axios.interceptors.request.use(
     ) {
       config.headers["authorization"] = localStorage.getItem("Atoken");
     }
-    console.log(config);
     return config;
   },
   function (error) {
