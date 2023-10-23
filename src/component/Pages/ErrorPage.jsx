@@ -1,4 +1,3 @@
-
 import { Container, Typography, Button, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 export const ErrorPage = () => {

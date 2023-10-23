@@ -90,14 +90,14 @@ export const Products = () => {
             </InputAdornment>
           ),
           sx: {
-            color: "white", 
-            "& fieldset": { borderColor: "white" }, 
-            "&:hover fieldset": { borderColor: "white" }, 
+            color: "white",
+            "& fieldset": { borderColor: "white" },
+            "&:hover fieldset": { borderColor: "white" },
           },
         }}
         InputLabelProps={{
           sx: {
-            color: "white", 
+            color: "white",
           },
         }}
         value={search}

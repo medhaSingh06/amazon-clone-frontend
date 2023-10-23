@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: "http://localhost:3000/api",
 });
 
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   function (config) {
     if (
       localStorage.getItem("Atoken") !== undefined ||
@@ -19,7 +19,7 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   function (response) {
     return response;
   },
@@ -28,7 +28,4 @@ axios.interceptors.response.use(
   }
 );
 
-instance.defaults.headers.common["Authorization"] =
-  localStorage.getItem("Atoken");
-instance.defaults.headers.common["accept-language"] = "en";
 export default instance;

@@ -39,7 +39,7 @@ export const Header = () => {
           color="secondary"
           sx={{ flexGrow: 1 }}
         >
-          Tech Mart
+          Food Mart
         </Typography>
         <Stack direction="row" spacing={2}>
           {!token ? (

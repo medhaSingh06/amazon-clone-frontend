@@ -42,7 +42,8 @@ const CartSlice = createSlice({
       })
       .addCase(addItemToCart.fulfilled, (state, action) => {
         const newItem = action.payload;
-  
+        console.log(newItem);
+
         const existingItem = state.items.find(
           (item) => item.ProductId === newItem.ProductId
         );

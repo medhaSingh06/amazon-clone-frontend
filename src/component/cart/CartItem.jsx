@@ -28,7 +28,7 @@ export const CartItem = (props) => {
         console.log("Error removing item from cart:", error);
       });
   };
-
+  console.log(quantity);
   const handleUpdateQty = (id, quantity) => {
     const data = {
       ProductId: id,
@@ -45,7 +45,7 @@ export const CartItem = (props) => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ width: "100%", minHeight: "400px" }}>
+    <Container maxWidth="sm" sx={{ width: "100%", mt: 2 }}>
       <Paper elevation={3} sx={{ bgcolor: "#323533" }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -78,7 +78,7 @@ export const CartItem = (props) => {
                 color="secondary"
                 variant="outlined"
                 onClick={() => handleUpdateQty(id, quantity - 1)}
-                disabled={quantity === 1}
+                disabled={+quantity === 1}
               >
                 -
               </Button>

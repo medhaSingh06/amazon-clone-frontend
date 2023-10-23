@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 
-
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -29,9 +28,7 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const {token} = UseAuth()
-
+  // const {token} = UseAuth()
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(" ");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
@@ -57,15 +54,21 @@ export const Login = () => {
   };
   return (
     <>
-    {!token ? (
-      <>
-      <Container component="main" maxWidth="xs" sx={{ bgcolor: "white" }}>
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          bgcolor: "white",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "center",
+            alignSelf: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -74,6 +77,7 @@ export const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <h1> </h1>
           <Box
             component="form"
             onSubmit={handleSubmit(onSubmit)}
@@ -93,7 +97,7 @@ export const Login = () => {
               error={!!errors.email}
               helperText={errors.email && errors.email.message}
             />
-            <h1></h1>
+            <h1> </h1>
             <TextField
               {...register("password", {
                 required: "Password is required",
@@ -119,6 +123,7 @@ export const Login = () => {
               helperText={errors.password && errors.password.message}
             />
             <h1> </h1>
+
             <Button
               type="submit"
               fullWidth
@@ -143,23 +148,8 @@ export const Login = () => {
         autoHideDuration={3000}
         onClose={handleSnackbarClose}
       >
-        <Alert severity={snackbarSeverity}>
-          {snackbarMessage}
-        </Alert>
+        <Alert severity={snackbarSeverity}>{snackbarMessage}</Alert>
       </Snackbar>
-      </>) : ( <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      height="98vh"
-      padding="16px"
-    >
-    <Typography variant="h4" gutterBottom color='secondary'>Already Logged In {' '}
-    <Link to="/signin" style={{ color: '#007bff', textDecoration: 'none' }}>Sign in</Link> with different Account.
-    </Typography>
-    </Box>)}
-      
     </>
   );
 };

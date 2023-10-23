@@ -2,8 +2,7 @@ import { Grid, Typography, Button, Box } from "@mui/material";
 import { CartItem } from "./CartItem";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, removeAllItemsFromCart } from "../../store/cartSlice";
-import { useEffect } from "react";
+import { removeAllItemsFromCart } from "../../store/cartSlice";
 import { addOrder } from "../../api/apiHandler";
 import { UseAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -48,7 +47,9 @@ export const Cart = () => {
         console.log("error in removing", error);
       });
   };
-
+  console.log(cartItems, "ITEMS");
+  console.log(totalQuantity, "quantity");
+  console.log(totalPrice, "price");
   return (
     <div>
       {!token ? (
@@ -73,30 +74,28 @@ export const Cart = () => {
         </Box>
       ) : (
         <>
-          
-
           {cartItems.length > 0 ? (
             <>
-            <Typography variant="h4" gutterBottom color="secondary">
-            Shopping Cart
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={cartItems.length <= 0}
-            onClick={handleRemoveAll}
-          >
-            RemoveAll
-          </Button>
+              <Typography variant="h4" gutterBottom color="secondary">
+                Shopping Cart
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                disabled={cartItems.length <= 0}
+                onClick={handleRemoveAll}
+              >
+                RemoveAll
+              </Button>
               {cartItems.map((item) => (
-              <CartItem
-                key={item.ProductId}
-                id={item.ProductId}
-                name={item.ProductName}
-                quantity={item.quantity}
-                price={item.total_price}
-                image={item.image}
-              />
+                <CartItem
+                  key={item.ProductId}
+                  id={item.ProductId}
+                  name={item.ProductName}
+                  quantity={item.quantity}
+                  price={item.ProductPrice}
+                  image={item.image}
+                />
               ))}
               <Grid item xs={12} sm={6} sx={{ textAlign: "right" }}>
                 <Typography
@@ -127,16 +126,17 @@ export const Cart = () => {
             </>
           ) : (
             <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      height="98vh"
-      padding="16px"
-    >
-    <Typography variant="h4" gutterBottom color='secondary'>Cart is Empty
-    </Typography>
-    </Box>
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              height="98vh"
+              padding="16px"
+            >
+              <Typography variant="h4" gutterBottom color="secondary">
+                Cart is Empty
+              </Typography>
+            </Box>
           )}
         </>
       )}
